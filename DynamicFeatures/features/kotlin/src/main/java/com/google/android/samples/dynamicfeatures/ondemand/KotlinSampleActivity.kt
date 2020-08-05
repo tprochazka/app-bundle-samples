@@ -17,6 +17,7 @@
 package com.google.android.samples.dynamicfeatures.ondemand
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.samples.dynamicfeatures.BaseSplitActivity
 import com.google.android.samples.dynamicfeatures.ondemand.kotlin.R
 
@@ -25,6 +26,21 @@ class KotlinSampleActivity : BaseSplitActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        runCatching {
+            println(getString(R.string.content_text_before))
+        }.onFailure {
+            Log.e("ERROR", "getStringFailed", it)
+        }
+
         setContentView(R.layout.activity_feature_kotlin)
+
+        runCatching {
+            println(getString(R.string.content_text))
+        }.onFailure {
+            Log.e("ERROR", "getStringFailed", it)
+        }
+
     }
+
 }
